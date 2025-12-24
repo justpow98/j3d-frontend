@@ -45,7 +45,18 @@
             </div>
 
             <div class="orders-controls">
-                <div class="filters">
+                <div class="controls-header">
+                    <button class="toggle-filters-btn" (click)="toggleFilters()">
+                        {{ showFilters ? 'Hide Filters' : 'Show Filters' }}
+                    </button>
+                    <div class="active-summary" *ngIf="activeFilterCount() > 0 && !showFilters">
+                        <span class="summary-label">Active:</span>
+                        <span class="chip" *ngFor="let chip of activeFilterChips()">{{ chip }}</span>
+                        <button class="filter-btn inline" (click)="applyFilters()">Apply</button>
+                        <button class="filter-btn ghost inline" (click)="clearFilters()">Clear</button>
+                    </div>
+                </div>
+                <div class="filters" *ngIf="showFilters">
                     <input type="text" placeholder="Status" [(ngModel)]="orderFilters.status">
                     <input type="text" placeholder="Production Status" [(ngModel)]="orderFilters.production_status">
                     <input type="text" placeholder="Product keyword" [(ngModel)]="orderFilters.product">

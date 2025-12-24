@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CommunicationLog, Order, OrderNote } from '../models/types';
-import { AuthService } from './auth.service';
-import { environment } from '../../../environments/environment';
+import { CommunicationLog, Order, OrderNote } from 'models/types';
+import { AuthService } from 'services/auth.service';
+import { environment } from 'environments/environment';
 
 /**
  * Service for managing Etsy orders and order-related operations.

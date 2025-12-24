@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Filament, FilamentUsage } from '../models/types';
-import { AuthService } from './auth.service';
-import { environment } from '../../../environments/environment';
+import { Filament, FilamentUsage } from 'models/types';
+import { AuthService } from 'services/auth.service';
+import { environment } from 'environments/environment';
 
 /**
  * Service for managing filament inventory.

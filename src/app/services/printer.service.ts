@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
-import { environment } from '../../../environments/environment';
+import { AuthService } from 'services/auth.service';
+import { environment } from 'environments/environment';
 
 export interface Printer {
   id: number;

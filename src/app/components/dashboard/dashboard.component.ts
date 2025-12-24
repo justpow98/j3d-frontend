@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { OrderService } from '../../services/order.service';
-import { FilamentService } from '../../services/filament.service';
-import { Order, Filament, ProductProfile, OrderNote, CommunicationLog } from '../../models/types';
-import { AnalyticsComponent } from '../analytics/analytics.component';
-import { ProductionComponent } from '../production/production.component';
-import { PrinterManagementComponent } from '../printer-management/printer-management.component';
+import { AuthService } from 'services/auth.service';
+import { OrderService } from 'services/order.service';
+import { FilamentService } from 'services/filament.service';
+import { Order, Filament, ProductProfile, OrderNote, CommunicationLog } from 'models/types';
+import { AnalyticsComponent } from 'components/analytics/analytics.component';
+import { ProductionComponent } from 'components/production/production.component';
+import { PrinterManagementComponent } from 'components/printer-management/printer-management.component';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -167,6 +167,46 @@ export class DashboardComponent implements OnInit {
             max_total: undefined
         };
         this.loadOrders();
+    }
+
+    // Filters UI state
+    showFilters: boolean = false;
+
+    ngAfterViewInit(): void {
+        // Default collapsed; restore previous state
+        const saved = localStorage.getItem('dashboard_filters_collapsed');
+        this.showFilters = saved ? saved !== 'true' : false;
+    }
+
+    toggleFilters(): void {
+        this.showFilters = !this.showFilters;
+        localStorage.setItem('dashboard_filters_collapsed', (!this.showFilters).toString());
+    }
+
+    activeFilterCount(): number {
+        const f = this.orderFilters;
+        let count = 0;
+        if (f.status) count++;
+        if (f.production_status) count++;
+        if (f.product) count++;
+        if (f.start_date) count++;
+        if (f.end_date) count++;
+        if (typeof f.min_total === 'number' && f.min_total !== undefined) count++;
+        if (typeof f.max_total === 'number' && f.max_total !== undefined) count++;
+        return count;
+    }
+
+    activeFilterChips(): string[] {
+        const chips: string[] = [];
+        const f = this.orderFilters;
+        if (f.status) chips.push(`Status: ${f.status}`);
+        if (f.production_status) chips.push(`Prod: ${f.production_status}`);
+        if (f.product) chips.push(`Product: ${f.product}`);
+        if (f.start_date) chips.push(`From: ${f.start_date}`);
+        if (f.end_date) chips.push(`To: ${f.end_date}`);
+        if (typeof f.min_total === 'number' && f.min_total !== undefined) chips.push(`Min: ${f.min_total}`);
+        if (typeof f.max_total === 'number' && f.max_total !== undefined) chips.push(`Max: ${f.max_total}`);
+        return chips;
     }
 
     loadFilaments(): void {
