@@ -225,9 +225,9 @@ All backend communication goes through service classes:
 2. Redirected to Etsy OAuth
 3. User grants permissions
 4. Redirected to app with auth code
-5. Backend validates code, issues JWT, and sets it in an HttpOnly, Secure, SameSite cookie
-6. Frontend relies on the browser to send the authentication cookie with API requests; tokens are not stored in localStorage or other JavaScript-accessible storage
-7. All API calls include authentication cookie automatically
+5. Backend validates code, issues JWT, and sets the token in an HttpOnly, Secure, SameSite cookie
+6. Browser automatically sends authentication cookie with all API requests
+7. Tokens are not stored in localStorage or other JavaScript-accessible storage
 
 ## API Integration
 
