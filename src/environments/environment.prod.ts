@@ -4,7 +4,10 @@
  * The API URL should be set to your production API endpoint.
  */
 
+// Resolve API URL from build-time env if available (guarded for browser runtime).
+const apiUrl = (globalThis as any)?.process?.env?.API_URL || '/api';
+
 export const environment = {
   production: true,
-  apiUrl: process.env['API_URL'] || '/api'  // Uses API_URL env var, defaults to /api
+  apiUrl
 };
