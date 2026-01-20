@@ -37,9 +37,9 @@ pipeline {
                         error "VERSION file is empty or whitespace only. Cannot continue."
                     }
 
-                    // Basic version format validation (e.g., 1.2.3 or 1.2.3-rc1)
-                    if (!(version ==~ /\d+\.\d+\.\d+([-+][0-9A-Za-z.-]+)?/)) {
-                        error "VERSION '${version}' does not match expected format (e.g., 1.2.3 or 1.2.3-rc1)."
+                    // Basic version format validation following semantic versioning (e.g., 1.2.3, 1.2.3-rc1, 1.2.3+build)
+                    if (!(version ==~ /\d+\.\d+\.\d+(-[0-9A-Za-z]+(\.[0-9A-Za-z]+)*)?(\+[0-9A-Za-z]+(\.[0-9A-Za-z]+)*)?/)) {
+                        error "VERSION '${version}' does not match semantic versioning format (e.g., 1.2.3, 1.2.3-rc1, 1.2.3+build)."
                     }
 
                     env.VERSION = version
