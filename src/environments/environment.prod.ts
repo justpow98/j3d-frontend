@@ -1,6 +1,6 @@
 /**
  * Production environment configuration.
- * This file is used during production build with `ng build --prod`.
+ * This file is used during production build with `ng build --configuration production`.
  * 
  * The API URL is set to '/api' to work with the nginx proxy configuration.
  * Nginx proxies /api/ requests to the backend service.
