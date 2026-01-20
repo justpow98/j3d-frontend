@@ -4,7 +4,6 @@ pipeline {
     environment {
         REGISTRY = 'ghcr.io'
         IMAGE_NAME = 'justinmpowers/j3d-frontend'
-        DOCKER_CREDENTIALS = credentials('github-container-registry')
     }
     
     options {
